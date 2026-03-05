@@ -1,0 +1,292 @@
+    1  apt update
+    2  apt install openjdk-17-jdk -y
+    3  echo 'export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64' >> ~/.bashrc
+    4  echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.bashrc
+    5  source ~/.bashrc
+    6  echo  $PATH
+    7  /usr/lib/jvm/java-17-openjdk-amd64/bin/java
+    8  readlink -f $(which java)
+    9  echo $JAVA_HOME
+   10  exit 
+   11  cd /opt/hadoop
+   12  ls 
+   13  cd /etc/hadoop
+   14  cd etc
+   15  cd hadoop
+   16  vim hdfs-site.xml
+   17  hdfs namenode -bootstrapStandby
+   18  # Stop NameNodes
+   19  hadoop-daemon.sh stop namenode
+   20  # Stop JournalNodes
+   21  hadoop-daemon.sh stop journalnode
+   22  # Stop NameNodes
+   23  hadoop-daemon.sh stop namenode
+   24  # Stop JournalNodes
+   25  hadoop-daemon.sh stop journalnode
+   26  jps
+   27  hdfs namenode -format
+   28  # or specifically for HA:
+   29  hdfs namenode -initializeSharedEdits
+   30  adduser --disabled-password --gecos "" hadoop
+   31  sudo chown -R root:root /hadoop_data
+   32  exit 
+   33  apt update 
+   34  apt update
+   35  apt install sudo
+   36  exit
+   37  su - 
+   38  sudo mkdir -p /hadoop_data/namenode
+   39  sudo mkdir -p /hadoop_data/datanode
+   40  sudo mkdir -p /hadoop_data/journalnode/mycluster
+   41  sudo chown -R root:root /hadoop_data
+   42  sudo chmod -R 700 /hadoop_data
+   43  sudo chown -R root:root /hadoop_data
+   44  sudo chown -R hadoop:hadoop /hadoop_data/namenode
+   45  sudo chown -R hadoop:hadoop /hadoop_data/datanode
+   46  sudo chown -R hadoop:hadoop /hadoop_data/journalnode
+   47  sudo mkdir -p /hadoop_data/namenode
+   48  sudo chown -R hadoop:hadoop /hadoop_data/namenode   # if using hadoop user
+   49  sudo chmod -R 700 /hadoop_data/namenode
+   50  id hadoop
+   51  sudo mkdir -p /hadoop_data/namenode
+   52  sudo mkdir -p /hadoop_data/datanode
+   53  sudo mkdir -p /hadoop_data/journalnode/mycluster
+   54  sudo chown -R hadoop:hadoop /hadoop_data
+   55  sudo chmod -R 700 /hadoop_data
+   56  jps
+   57  sudo rm -rf /hadoop_data/datanode/*
+   58  sudo chown -R root:root /hadoop_data
+   59  jps
+   60  sudo groupdel -r hadoop
+   61  sudo userpdel -r hadoop
+   62  sudo userdel -r hadoop
+   63  cd /opt/hadoop/etc/hadoop
+   64  vim hdfs-site.xml
+   65  # Stop NameNodes
+   66  /opt/hadoop/sbin/hadoop-daemon.sh stop namenode
+   67  # Stop JournalNodes
+   68  /opt/hadoop/sbin/hadoop-daemon.sh stop journalnode
+   69  # Stop DataNodes
+   70  /opt/hadoop/sbin/hadoop-daemon.sh stop datanode
+   71  rm -rf /hadoop_data/journalnode/mycluster/*
+   72  ls -l /hadoop_data/journalnode/mycluster
+   73  /opt/hadoop/bin/hdfs namenode -format
+   74  /opt/hadoop/bin/hdfs namenode -initializeSharedEdits
+   75  /opt/hadoop/bin/hdfs namenode -format
+   76  ls /hadoop_data/journalnode/mycluster
+   77  ls -l /hadoop_data/journalnode/mycluster
+   78  rm -rf /hadoop_data/journalnode/mycluster
+   79  mkdir -p /hadoop_data/journalnode/mycluster
+   80  chmod 700 /hadoop_data/journalnode/mycluster
+   81  chown root:root /hadoop_data/journalnode/mycluster
+   82  export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+   83  export PATH=/opt/hadoop/bin:/opt/hadoop/sbin:$PATH
+   84  hdfs namenode -format
+   85  hdfs namenode -initializeSharedEdits
+   86  # on each node
+   87  pkill -f JournalNode
+   88  pkill -f NameNode
+   89  jps
+   90  rm -rf /hadoop_data/journalnode/mycluster/*
+   91  # on each node
+   92  /opt/hadoop/bin/hdfs --daemon start journalnode
+   93  # on one NameNode (nn1)
+   94  /opt/hadoop/bin/hdfs namenode -initializeSharedEdits
+   95  ls -ld /hadoop_data/journalnode/mycluster
+   96  df -hT /hadoop_data/journalnode/mycluster
+   97  mount | grep /hadoop_data
+   98  stop-dfs.sh
+   99  hdfs namenode -initializeSharedEdits
+  100  hdfs namenode -format
+  101  hdfs zkfc -formatZK
+  102  hdfs namenode -format
+  103  start-dfs.sh
+  104  hdfs zkfc -formatZK
+  105  hdfs namenode -format
+  106  hdfs --daemon start namenode
+  107  start-dfs.sh
+  108  echo "export HDFS_NAMENODE_USER=root" >> /opt/hadoop/etc/hadoop/hadoop-env.sh
+  109  echo "export HDFS_DATANODE_USER=root" >> /opt/hadoop/etc/hadoop/hadoop-env.sh
+  110  echo "export HDFS_JOURNALNODE_USER=root" >> /opt/hadoop/etc/hadoop/hadoop-env.sh
+  111  echo "export HDFS_ZKFC_USER=root" >> /opt/hadoop/etc/hadoop/hadoop-env.sh
+  112  echo "export YARN_RESOURCEMANAGER_USER=root" >> /opt/hadoop/etc/hadoop/hadoop-env.sh
+  113  echo "export YARN_NODEMANAGER_USER=root" >> /opt/hadoop/etc/hadoop/hadoop-env.sh
+  114  start-dfs.sh
+  115  dirname $(dirname $(readlink -f $(which java)))
+  116  echo "export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))" >> /opt/hadoop/etc/hadoop/hadoop-env.sh
+  117  cp /opt/hadoop/etc/hadoop/hadoop-env.sh /shared/hadoop-env.sh
+  118  start-dfs.sh
+  119  apt-get install -y openssh-server openssh-client
+  120  ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+  121  cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+  122  ssh-copy-id root@node01
+  123  ssh-copy-id root@node02
+  124  ssh-copy-id root@node03
+  125  ssh-copy-id root@node04
+  126  ssh-copy-id root@node05
+  127  cp ~/.ssh/id_rsa.pub /shared/id_rsa.pub
+  128  ssh root@node01 hostname
+  129  ssh root@node03 hostname
+  130  jps
+  131  pkill -9 JournalNode
+  132  jps
+  133  pkill -f JournalNode
+  134  jps
+  135  hdfs haadmin -getServiceState nn1
+  136  hdfs haadmin -getServiceState nn2
+  137  hdfs haadmin -getServiceState nn1
+  138  hdfs haadmin -getServiceState nn2
+  139  hdfs --daemon start zkfc
+  140  cat /opt/hadoop/logs/hadoop-root-zkfc-node01.log
+  141  hdfs --daemon start zkfc
+  142  cat /opt/hadoop/logs/hadoop-root-zkfc-node01.log
+  143  cat /opt/hadoop/logs/hadoop-root-zkfc-node02.log
+  144  vim hdfs-site.xml
+  145  # On node02 after editing hdfs-site.xml
+  146  cp /opt/hadoop/etc/hadoop/hdfs-site.xml /shared/hdfs-site.xml
+  147  # node01
+  148  hdfs --daemon stop zkfc && hdfs --daemon start zkfc
+  149  # node02
+  150  hdfs --daemon stop zkfc && hdfs --daemon start zkfc
+  151  jps
+  152  hdfs haadmin -getServiceState nn1
+  153  hdfs haadmin -getServiceState nn2
+  154  kill -9 $(jps | grep NameNode | awk '{print $1}')
+  155  watch -n 1 "hdfs haadmin -getServiceState nn1"
+  156  hdfs --daemon start namenode
+  157  cat /opt/hadoop/etc/hadoop/yarn-site.xml
+  158  vim yarn-site.xml
+  159  cp /opt/hadoop/etc/hadoop/yarn-site.xml /shared/yarn-site.xml
+  160  start-yarn.sh
+  161  jps 
+  162  jps
+  163  pkill -f 6278
+  164  jps
+  165  docker exec node02 kill -9 6278
+  166  hdfs --daemon stop nodemanager
+  167  jps
+  168  pkill -f NameNode
+  169  jps
+  170  echo -e "node03\nnode04\nnode05" > /opt/hadoop/etc/hadoop/workers
+  171  cp /opt/hadoop/etc/hadoop/workers /shared/workers
+  172  docker exec node01 cp /shared/workers /opt/hadoop/etc/hadoop/workers
+  173  docker exec node03 cp /shared/workers /opt/hadoop/etc/hadoop/workers
+  174  docker exec node04 cp /shared/workers /opt/hadoop/etc/hadoop/workers
+  175  docker exec node05 cp /shared/workers /opt/hadoop/etc/hadoop/workers
+  176  cp /opt/hadoop/etc/hadoop/workers /shared/workers
+  177  hdfs --daemon stop nodemanager
+  178  jps
+  179  starthdf
+  180  jps
+  181  start-dfs.sh
+  182  jps
+  183  ls -l /opt/hadoop/etc/hadoop/workers
+  184  stop-dfs.sh
+  185  stop-yarn.sh
+  186  echo -e "node01\nnode02" > /opt/hadoop/etc/hadoop/masters
+  187  cp /opt/hadoop/etc/hadoop/masters /shared/masters
+  188  start-dfs.sh
+  189  jps
+  190  pkill -f NodeManager
+  191  jps
+  192  stop-yarn.sh
+  193  jps
+  194  start-yarn.sh
+  195  jps
+  196  cat /opt/hadoop/etc/hadoop/masters
+  197  stop-dfs.sh
+  198  stop-yarn.sh
+  199  start-dfs.sh
+  200  jps
+  201  grep -A2 "namenode.http-address" /opt/hadoop/etc/hadoop/hdfs-site.xml
+  202  cat /opt/hadoop/etc/hadoop/hdfs-site.xml
+  203  jps
+  204  stop-dfs.sh
+  205  kill -9 $(jps | grep NameNode | awk '{print $1}')
+  206  exit
+  207  jps
+  208  stop-dfs.sh
+  209  jps
+  210  exit 
+  211  jps
+  212  pkill -F NameNode
+  213  pkill -f NameNode
+  214  jps
+  215  jps 
+  216  kill -9 2580 6278
+  217  exit
+  218  jps
+  219  kill -9 2580 6278
+  220  jps
+  221  pkill -9 NameNode
+  222  jps
+  223  exit
+  224  service ssh start
+  225  vim /shared/ClusterStart.sh
+  226  service ssh start
+  227  vim /shared/ClusterStart.sh
+  228  vim /opt/hadoop/etc/hadoop/core-site.xml
+  229  ls /shared
+  230  ssh root@node01 cp /shared/hdfs-site.xml /opt/hadoop/etc/hadoop/hdfs-site.xml
+  231  ssh root@node03 cp /shared/hdfs-site.xml /opt/hadoop/etc/hadoop/hdfs-site.xml
+  232  ssh root@node04 cp /shared/hdfs-site.xml /opt/hadoop/etc/hadoop/hdfs-site.xml
+  233  ssh root@node05 cp /shared/hdfs-site.xml /opt/hadoop/etc/hadoop/hdfs-site.xml
+  234  Clusterstop.sh
+  235  jps
+  236  exit 
+  237  service ssh start
+  238  ClusterStart.sh 
+  239  ssh root@node01 cp /shared/yarn-site.xml /opt/hadoop/etc/hadoop/yarn-site.xml
+  240  ssh root@node02 cp /shared/yarn-site.xml /opt/hadoop/etc/hadoop/yarn-site.xml
+  241  ssh root@node03 cp /shared/yarn-site.xml /opt/hadoop/etc/hadoop/yarn-site.xml
+  242  ssh root@node04 cp /shared/yarn-site.xml /opt/hadoop/etc/hadoop/yarn-site.xml
+  243  ssh root@node05 cp /shared/yarn-site.xml /opt/hadoop/etc/hadoop/yarn-site.xml
+  244  ClusterStop.sh 
+  245  ClusterStart.sh 
+  246  vim /shared/ClusterStart.sh 
+  247  echo "=== Cluster Status ==="
+  248  echo "--- node01 ---"
+  249  ssh root@node01 "jps"
+  250  echo "--- node02 ---"
+  251  jps
+  252  echo "--- node03 ---"
+  253  ssh root@node03 "jps"
+  254  echo "--- node04 ---"
+  255  ssh root@node04 "jps"
+  256  echo "--- node05 ---"
+  257  ssh root@node05 "jps"
+  258  echo "=== HA Status ==="
+  259  echo "NN STATUS FOR node01"
+  260  echo "     "
+  261  vim /shared/ClusterStart.sh 
+  262  vim /shared/CheckHA.sh 
+  263  CheckHA.sh 
+  264  chmod +x CheckHA.sh 
+  265  chmod +x /shared/CheckHA.sh 
+  266  CheckHA.sh 
+  267  vim /shared/CheckHA.sh 
+  268  CheckHA.sh 
+  269  ClusterStop.sh 
+  270  ClusterStart.sh 
+  271  ClusterStop.sh 
+  272  ClusterStart.sh 
+  273  cd /opt/hadoop/etc/hadoop
+  274  ls 
+  275  vim core-site.xml
+  276  vim /shared/ClusterStart.sh 
+  277  find -name start
+  278  locate start 
+  279  ls / grep | start 
+  280  ls / | grep start 
+  281  ls /
+  282  cd /opt/hadoop
+  283  ls 
+  284  ls bin 
+  285  ls sbin 
+  286  cat start-yarn.sh
+  287  cat /sbin/start-yarn.sh
+  288  ls sbin 
+  289  cd sbin 
+  290  cat start-yarn.sh
+  291  history
+  292  history >> /shared/CommandHistory

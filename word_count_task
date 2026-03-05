@@ -1,0 +1,83 @@
+    1  [200~apt update
+    2  apt install openjdk-17-jdk -y
+    3  apt update 
+    4  apt install openjdk-17-jdk -y
+    5  echo 'export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64' >> ~/.bashrc
+    6  echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.bashrc
+    7  source ~/.bashrc
+    8  echo $JAVA_HOME
+    9  cat ~/.bashrc
+   10  echo $PATH
+   11  exit 
+   12  apt update 
+   13  apt install sudo 
+   14  exit 
+   15  /opt/hadoop/bin/hdfs haadmin -getServiceState nn2
+   16  exit 
+   17  service ssh start
+   18  exit 
+   19  service ssh enable 
+   20  jps
+   21  service ssh enable 
+   22  service ssh start
+   23  vim /shared/ClusterStart.sh 
+   24  jps
+   25  vim /shared/ClusterStart.sh 
+   26  cd /opt/hadoop
+   27  ls 
+   28  ls etc 
+   29  cd etc 
+   30  cd hadoop
+   31  ls 
+   32  ls | grep ma
+   33  ls | grep w
+   34  cat core-site.xml
+   35  cat /shared/ClusterStart.sh 
+   36  cat /shared/ClusterStop.sh 
+   37  exit
+   38  exit 
+   39  service ssh start
+   40  exit
+   41  ssh root@node01 jps
+   42  exit
+   43  jps
+   44  cd ~
+   45  exit
+   46  service ssh start 
+   47  exit 
+   48  service ssh start
+   49  exit 
+   50  systemctl enable ssh
+   51  exit
+   52  echo "service ssh start" >> ~/.bashrc
+   53  exit
+   54  service ssh status
+   55  exit
+   56  yarn --daemon stop resourcemanger
+   57* 
+   58  checkha.sh
+   59  yarn --daemon start resourcemanger
+   60  yarn --daemon start resourcemanager
+   61  hdfs --daemon start resourcemanager
+   62  hdfs --daemon start namenode
+   63  checkha.sh
+   64  vim /test 
+   65* hadoop jar /usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.4.2.jar wordcount /test /output2/
+   66  ls /usr/local/hadoop/share/hadoop/mapreduce/ 
+   67  hadoop jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.4.2.jar wordcount /test /output2
+   68  cat /test 
+   69  mkdir /test 
+   70  mkdir /test1 
+   71  cp /test /test1
+   72  hadoop jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.4.2.jar wordcount /test1/test /output2
+   73  hdfs -put /test1/test /test
+   74  hdfs dfs -put /test1/test /test
+   75  hadoop jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.4.2.jar wordcount /test1/test /output2
+   76  hadoop jar /opt/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.4.2.jar wordcount /test /output2
+   77  hdfs dfs -cat output2
+   78  hdfs dfs -cd output2
+   79  hdfs dfs -ls /output2
+   80  hdfs dfs -cat/output2//output2/part-r-00000
+   81  hdfs dfs -cat /output2//output2/part-r-00000
+   82  hdfs dfs -cat /output2/part-r-00000
+   83  history >> /shared/word_count_task 
